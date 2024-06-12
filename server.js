@@ -9,6 +9,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
@@ -29,6 +30,17 @@ app.post("/orders", (req, res) => {
   orderModel
     .create(orderData)
     .then((result) => res.json(result))
+    .catch((err) => console.log(err));
+});
+
+// get orders by user id
+
+app.get("/orders/:id", (req, res) => {
+  const { userId } = req.query;
+
+  orderModel
+    .find({ "user.id": userId })
+    .then((orders) => res.json(orders))
     .catch((err) => console.log(err));
 });
 
