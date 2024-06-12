@@ -28,7 +28,7 @@ app.post("/orders", (req, res) => {
 
   orderModel
     .create(orderData)
-    .then((result) => res.json("success"))
+    .then((result) => res.json(result))
     .catch((err) => console.log(err));
 });
 
